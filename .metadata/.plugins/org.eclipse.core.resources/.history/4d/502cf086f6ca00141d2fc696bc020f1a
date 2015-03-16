@@ -1,0 +1,157 @@
+package com.example.parse;
+
+import java.net.*;
+
+import org.apache.http.HttpResponse;
+import org.apache.http.NameValuePair;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.message.BasicNameValuePair;
+import org.apache.http.util.EntityUtils;
+import org.json.*;
+import javax.json.*;
+import java.io.*;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLConnection;
+import java.util.*;
+import android.app.Activity;
+import android.os.Bundle;
+import android.os.AsyncTask;
+import android.os.AsyncTask.Status;
+import android.view.Menu;
+import android.view.MenuItem;
+
+
+public class MainActivity extends Activity {
+
+	private class networkGo extends AsyncTask<Void, Void, String> {
+		
+		private String resultValue;
+
+        protected String doInBackground(Void ... params) {
+            resultValue = null;
+        /*	URL jesse = null;
+     		try {
+     			jesse = new URL("http://sodiumcut.com:7080/nwhacks/public/index.php/api");
+     			//jesse = new URL("http://api.upcdatabase.org/json/6eed8e46a8adbf7b2286b514fc08e1ac/6672101632");
+     		}catch(Exception e){
+     			System.out.println("some exception!");
+     		}
+     		
+             BufferedReader in = null;
+     		try {
+     			in = new BufferedReader(
+     			new InputStreamReader(jesse.openStream()));
+     		} catch (Exception e) {
+     			
+     		}
+
+     		String inputLine = "herro";
+     		
+     		try {
+     			inputLine = in.readLine();
+     			} catch (IOException e) {
+     			// TODO Auto-generated catch block
+     			System.out.println("!");
+     			
+     		}
+      
+     		try {
+       			in.close();
+       		} catch (Exception e) {
+       			System.out.println("LAST!");
+       			
+       		}
+             
+     		try{
+     		JSONObject reader = new JSONObject(inputLine);
+     		inputLine = reader.getString("name");
+     		}
+     		catch(Exception e){
+     			System.out.println(e.getMessage());
+     			
+     		}
+       */
+            
+            HttpClient httpClient = new DefaultHttpClient();
+            HttpPost httpPost = new HttpPost("http://sodiumcut.com:7080/nwhacks/public/index.php/api");
+            HttpResponse response = null;
+            
+            List < NameValuePair > nameValuePairs = new ArrayList < NameValuePair > (5);
+            nameValuePairs.add(new BasicNameValuePair("login", "true"));
+            nameValuePairs.add(new BasicNameValuePair("name", "testUser2"));
+            nameValuePairs.add(new BasicNameValuePair("email", "nays85@gmail.com"));
+            nameValuePairs.add(new BasicNameValuePair("password", "aa1235"));
+            
+            try{
+            httpPost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
+            } catch (Exception e){
+            	e.printStackTrace();
+            }
+            
+            
+            try{
+            response = httpClient.execute(httpPost);
+            }catch(Exception e){
+            	e.printStackTrace();
+            }
+            
+            try{
+            	resultValue =  EntityUtils.toString(response.getEntity());
+            }catch(Exception e){
+            	e.printStackTrace();
+            }
+           return resultValue;
+        }
+
+        protected void onProgressUpdate(Void ... progress) {
+            
+        }
+
+        protected void onPostExecute(String result) {
+        	resultValue = result;
+        }
+        
+        
+      }
+    
+	
+    @Override
+    protected void onCreate(Bundle savedInstanceState){
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+    
+         networkGo A = new networkGo();
+         try{
+         String result = A.execute().get();
+         System.out.println(result);
+         }catch (Exception e){
+        	 System.out.println(e.getMessage());
+         }
+        
+    }
+
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+        if (id == R.id.action_settings) {
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+}

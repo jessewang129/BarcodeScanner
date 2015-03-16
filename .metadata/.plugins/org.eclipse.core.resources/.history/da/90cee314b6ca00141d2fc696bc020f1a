@@ -1,0 +1,19 @@
+package test;
+
+
+import java.net.*;
+import java.io.*;
+
+public class URLReader {
+    public static void readUrl(String arg) throws Exception {
+    	URL jesse = new URL(arg);
+//        URL jesse = new URL("http://api.upcdatabase.org/json/6eed8e46a8adbf7b2286b514fc08e1ac/6672101632");
+        BufferedReader in = new BufferedReader(
+        new InputStreamReader(jesse.openStream()));
+
+        String inputLine;
+        while ((inputLine = in.readLine()) != null)
+            System.out.println(inputLine);
+        in.close();
+    }
+}

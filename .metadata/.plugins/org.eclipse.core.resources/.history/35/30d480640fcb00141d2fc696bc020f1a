@@ -1,0 +1,77 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+    <Button android:id="@+id/scan_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:text="@string/scan" />
+    <TextView
+	    android:id="@+id/scan_format"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:textIsSelectable="true"
+	    android:layout_centerHorizontal="true"
+	    android:layout_below="@id/scan_button" />
+
+	<TextView
+	    android:id="@+id/scan_content"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:layout_below="@id/scan_format"
+	    android:textIsSelectable="true" />
+
+	<TextView
+	    android:id="@+id/product_name"
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    android:layout_alignParentLeft="true"
+	    android:layout_below="@+id/scan_content"
+	    android:layout_marginTop="50dp"
+	    android:textAppearance="?android:attr/textAppearanceLarge" />
+	
+	<EditText
+	    android:id="@+id/password"
+	    android:layout_width="fill_parent"
+	    android:layout_height="wrap_content"
+	    android:layout_above="@+id/login_button"
+	    android:layout_alignParentLeft="true"
+	    android:ems="10"
+	    android:gravity="center"
+	    android:hint="@string/password"
+	    android:maxLines="1"
+	    android:password="true" />
+
+	<Button
+	    android:id="@+id/login_button"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:layout_alignParentBottom="true"
+	    android:layout_toLeftOf="@+id/scan_format"
+	    android:text="@string/login" />
+
+	<EditText
+	    android:id="@+id/email_address"
+	    android:layout_width="fill_parent"
+	    android:layout_height="wrap_content"
+	    android:layout_above="@+id/password"
+	    android:layout_alignParentLeft="true"
+	    android:ems="10"
+	    android:hint="@string/email"
+	    android:inputType="textEmailAddress"
+	    android:maxLines="1" >
+
+	    <requestFocus />
+	</EditText>
+
+	<TextView
+	    android:id="@+id/login_result"
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    android:layout_alignParentLeft="true"
+	    android:layout_above="@+id/email_address"
+	    android:layout_marginTop="32dp"
+	    android:textAppearance="?android:attr/textAppearanceLarge" />
+	
+</RelativeLayout>
